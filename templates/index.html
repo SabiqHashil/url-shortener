@@ -1,0 +1,91 @@
+{% extends "base.html" %} {% block content %}
+<section class="card">
+  <h2>Create a short link</h2>
+  <form method="post" action="{{ url_for('shorten') }}" class="grid">
+    <label>
+      <span>Long URL</span>
+      <input
+        type="url"
+        name="long_url"
+        placeholder="https://example.com/very/long/path?with=params"
+        required
+      />
+    </label>
+    <label>
+      <span>Custom code (optional)</span>
+      <input
+        type="text"
+        name="custom_code"
+        placeholder="e.g. mypromo"
+        maxlength="16"
+        pattern="[A-Za-z0-9]+"
+      />
+    </label>
+    <label>
+      <span>Expiry (hours, optional)</span>
+      <input
+        type="number"
+        name="expiry_hours"
+        min="1"
+        step="1"
+        placeholder="e.g. 24"
+      />
+    </label>
+    <button type="submit">Shorten</button>
+  </form>
+</section>
+
+<section class="card">
+  <h3>Recent links</h3>
+  {% if recent %}
+  <table>
+    <thead>
+      <tr>
+        <th>Short</th>
+        <th>Original</th>
+        <th>Clicks</th>
+        <th>Created</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for link in recent %}
+      <tr>
+        <td>
+          <a
+            href="{{ url_for('resolve', code=link.code, _external=True) }}"
+            target="_blank"
+            >{{ link.code }}</a
+          >
+        </td>
+        <td class="truncate">
+          <a href="{{ link.original_url }}" target="_blank"
+            >{{ link.original_url }}</a
+          >
+        </td>
+        <td>{{ link.clicks }}</td>
+        <td>{{ link.created_at|localtime }}</td>
+        <td><a href="{{ url_for('stats', code=link.code) }}">Stats</a></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+  <p class="muted">No links yet. Create your first one above.</p>
+  {% endif %}
+</section>
+
+<section class="card">
+  <h3>API</h3>
+  <pre>
+POST /api/shorten
+Content-Type: application/json
+
+{
+  "url": "https://example.com",
+  "code": "custom-optional",
+  "expiry_hours": 24
+}</pre
+  >
+</section>
+{% endblock %}

@@ -1,0 +1,129 @@
+:root {
+  --bg: #0b0f14;
+  --fg: #e6eef5;
+  --muted: #a7b3c2;
+  --card: #121822;
+  --accent: #3ea6ff;
+  --danger: #ff5d6c;
+  --ok: #1bd760;
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font: 16px/1.45 system-ui, -apple-system, Segoe UI, Roboto, Ubuntu,
+    "Helvetica Neue", Arial;
+}
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 24px;
+}
+header h1 {
+  margin: 0;
+}
+header .muted {
+  color: var(--muted);
+  margin-top: 4px;
+}
+.card {
+  background: var(--card);
+  padding: 20px;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+  margin: 18px 0;
+}
+.grid {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: 1fr 1fr 1fr auto;
+  align-items: end;
+}
+label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+input {
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid #273040;
+  background: #0d121a;
+  color: var(--fg);
+}
+button {
+  padding: 12px 16px;
+  border: none;
+  border-radius: 12px;
+  background: var(--accent);
+  color: #00162a;
+  font-weight: 700;
+  cursor: pointer;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+th,
+td {
+  padding: 10px;
+  border-bottom: 1px solid #1e2633;
+}
+tr:hover {
+  background: #0f1722;
+}
+.truncate {
+  max-width: 520px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.flash {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 16px 0;
+}
+.flash li {
+  padding: 10px;
+  border-radius: 10px;
+  margin-bottom: 8px;
+}
+.flash li.success {
+  background: rgba(27, 215, 96, 0.12);
+  color: var(--fg);
+  border: 1px solid var(--ok);
+}
+.flash li.error {
+  background: rgba(255, 93, 108, 0.12);
+  color: var(--fg);
+  border: 1px solid var(--danger);
+}
+.kv {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 8px;
+}
+.kv li {
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  gap: 12px;
+}
+.footer {
+  color: var(--muted);
+  font-size: 14px;
+  text-align: center;
+}
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
